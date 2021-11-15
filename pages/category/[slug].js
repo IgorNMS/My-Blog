@@ -3,18 +3,18 @@ import { fetchAPI } from "../../lib/api"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 
-const Category = ({ category, categories }) => {
+const Category = ({ category, categories, bannerApi }) => {
   const seo = {
     metaTitle: category.name,
     metaDescription: `All ${category.name} articles`,
   }
 
   return (
-    <Layout categories={categories}>
+    <Layout categories={categories} banner={bannerApi}>
       <Seo seo={seo} />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>{category.name}</h1>
+          <h1 className="uk-light">{category.name}</h1>
           <Articles articles={category.articles} />
         </div>
       </div>
@@ -38,9 +38,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const category = (await fetchAPI(`/categories?slug=${params.slug}`))[0]
   const categories = await fetchAPI("/categories")
+  const bannerApi = await fetchAPI("/banner")
 
   return {
-    props: { category, categories },
+    props: { category, categories, bannerApi },
     revalidate: 1,
   }
 }

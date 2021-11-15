@@ -6,7 +6,7 @@ import NextImage from "../../components/image"
 import Seo from "../../components/seo"
 import { getStrapiMedia } from "../../lib/media"
 
-const Article = ({ article, categories }) => {
+const Article = ({ article, categories, bannerApi }) => {
   const imageUrl = getStrapiMedia(article.image)
 
   const seo = {
@@ -17,7 +17,7 @@ const Article = ({ article, categories }) => {
   }
 
   return (
-    <Layout categories={categories}>
+    <Layout categories={categories} banner={bannerApi}>
       <Seo seo={seo} />
       <div
         id="banner"
@@ -26,7 +26,7 @@ const Article = ({ article, categories }) => {
         data-srcset={imageUrl}
         data-uk-img
       >
-        <h1>{article.title}</h1>
+        <h1 className="titleStyle">{article.title}</h1>
       </div>
       <div className="uk-section">
         <div className="uk-container uk-container-small">
@@ -69,9 +69,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const articles = await fetchAPI(`/articles?slug=${params.slug}`)
   const categories = await fetchAPI("/categories")
+  const bannerApi = await fetchAPI("/banner")
 
   return {
-    props: { article: articles[0], categories },
+    props: { article: articles[0], categories, bannerApi },
     revalidate: 1,
   }
 }

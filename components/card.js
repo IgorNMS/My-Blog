@@ -10,7 +10,7 @@ const Card = ({ article }) => {
           <div className="uk-card-media-top">
             <NextImage image={article.image} />
           </div>
-          <div className="uk-card-body">
+          <div className="uk-card-body uk-light">
             <p id="category" className="uk-text-uppercase">
               {article.category.name}
             </p>
