@@ -21,6 +21,11 @@ const Nav = ({ categories, banner }) => {
                 </li>
               )
             })}
+            <li>
+              <Link href="/about">
+                <a className="uk-link-reset">About</a>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

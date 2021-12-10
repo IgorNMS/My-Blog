@@ -9,7 +9,6 @@ a {
 h1 {
   font-family: Staatliches, serif;
   font-size: 120px;
-
 }
 
 #category {
@@ -55,4 +54,8 @@ img:hover {
 
 .photoBanner {
   max-height: 100px;
+}
+
+.salve {
+  height: 100vh;
 }
